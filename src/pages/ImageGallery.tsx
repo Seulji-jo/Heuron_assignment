@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { fetchImgList } from '../services';
 import { useQuery } from '@tanstack/react-query';
 import { ImgColorContext } from '../contexts/ImgColorContext';
+import ImgTable from '../components/ImageGallery/ImgTable';
 
 export default function ImageGallery() {
   const [isColorImg, setIsColorImg] = useState(true);
   const imgColor = isColorImg ? 'color' : 'gray';
-  const { isLoading, data } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ['images'],
     queryFn: fetchImgList,
   });
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <ImgColorContext value={imgColor}>
@@ -33,17 +30,13 @@ export default function ImageGallery() {
           </label>
         </div>
         <div className="table-responsive">
-          <table className="table align-middle">
-            <thead></thead>
-            <tbody>
-              <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-              </tr>
-            </tbody>
-          </table>
+          {isLoading ? (
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          ) : (
+            <ImgTable />
+          )}
         </div>
       </div>
     </ImgColorContext>
