@@ -7,4 +7,9 @@ const axiosClient = axios.create({
   },
 });
 
-export default axiosClient;
+async function fetchImgList() {
+  const { data } = await axiosClient.get('');
+  return data;
+}
+
+export { fetchImgList };

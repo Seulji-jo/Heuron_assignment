@@ -1,13 +1,33 @@
 import { useEffect } from 'react';
-import axiosClient from '../services';
+import { fetchImgList } from '../services';
+import { useQuery } from '@tanstack/react-query';
 
 export default function ImageGallery() {
-  async function fetchImgList() {
-    console.log(await axiosClient.get(''));
-    return await axiosClient.get('');
-  }
-  useEffect(() => {
-    fetchImgList();
+  const { isLoading, data } = useQuery({
+    queryKey: ['images'],
+    queryFn: fetchImgList,
   });
-  return <div>과제1</div>;
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  return (
+    <div>
+      과제1
+      <div className="table-responsive">
+        <table className="table align-middle">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
