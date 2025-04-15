@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router';
-import Layout from './layout';
-import ImageGallery from './pages/ImageGallery';
-import CardGame from './pages/CardGame';
-import SearchingData from './pages/SearchingData';
 import { RouterProvider } from 'react-router-dom';
+import Layout from './layout';
+import CardGame from './pages/CardGame';
+import ImageGallery from './pages/ImageGallery';
+import SearchingData from './pages/SearchingData';
 
 const router = createBrowserRouter([
   {
