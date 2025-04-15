@@ -1,3 +1,3 @@
 import { createContext } from 'react';
 
-export const ImgColorContext = createContext('color');
+export const ImgColorContext = createContext(true);

@@ -15,7 +15,7 @@ export default function ImageGallery() {
   });
 
   return (
-    <ImgColorContext value={imgColor}>
+    <ImgColorContext value={isColorImg}>
       <div>
         과제1
         <div className="form-check form-switch">

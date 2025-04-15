@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Image, Layer, Stage } from 'react-konva';
 import Konva from 'konva';
 import useImage from 'use-image';
+import { ImgColorContext } from '../../contexts/ImgColorContext';
 
 export default function Canvas({ imgSrc }: { imgSrc: string }) {
-  const [image] = useImage(imgSrc);
+  const isColorImg = useContext(ImgColorContext);
+  const imageRef = useRef<Konva.Image | null>(null);
+  const [image] = useImage(imgSrc, 'anonymous');
   const [isMoving, setIsMoving] = useState(false);
   const [screen, setScreen] = useState({ x: 0, y: 0 });
   const [imgSize, setImgSize] = useState({ w: 500, h: 333 });
@@ -27,16 +30,25 @@ export default function Canvas({ imgSrc }: { imgSrc: string }) {
     setIsMoving(false);
   };
 
+  useEffect(() => {
+    console.log(isColorImg);
+  }, [isColorImg]);
+  useEffect(() => {
+    if (image) {
+      // you many need to reapply cache on some props changes like shadow, stroke, etc.
+      imageRef.current?.cache();
+    }
+  }, [image]);
+
   return (
     <Stage width={window.innerWidth * 0.8} height={333}>
       <Layer>
         <Image
+          ref={imageRef}
           image={image}
-          minWidth={90}
-          minHeight={60}
-          maxWidth={window.innerWidth * 0.8}
           width={imgSize.w}
           height={imgSize.h}
+          filters={isColorImg ? [] : [Konva.Filters.Grayscale]}
           onMouseDown={mouseDownHandler}
           onMouseMove={mouseMoveHandler}
           onMouseUp={stopMouseMove}
