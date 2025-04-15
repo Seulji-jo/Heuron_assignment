@@ -12,10 +12,10 @@ export default function ImgTable({ data }: ImgTableProps) {
   }, [data]);
 
   return (
-    <table className="table align-middle">
+    <table className="table table-bordered align-middle">
       <thead>
         <tr>
-          <th></th>
+          <th className="text-center">Thumbnail</th>
         </tr>
       </thead>
       <tbody>
