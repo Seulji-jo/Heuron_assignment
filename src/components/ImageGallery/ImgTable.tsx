@@ -1,14 +1,16 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import { ImageItem } from '../../types/ImageGallery';
 import TableDataCell from './TableDataCell';
 
-export default function ImgTable() {
-  const cache = useQueryClient();
-  const data = cache.getQueryData<any[]>(['images']);
+type ImgTableProps = {
+  data: ImageItem[];
+};
 
+export default function ImgTable({ data }: ImgTableProps) {
   useEffect(() => {
     console.log(data);
   }, [data]);
+
   return (
     <table className="table align-middle">
       <thead>
