@@ -1,25 +1,27 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import useImageList from '../../hooks/useImageList';
 import { ImageItem } from '../../types/ImageGallery';
 
 type ImgTableProps = {
-  data: ImageItem[];
+  imgList: ImageItem[];
 };
 
-export default function ImgTable({ data }: ImgTableProps) {
+export default function ImgTable({ imgList }: ImgTableProps) {
   const chunkedData = useMemo(() => {
-    console.log(data);
+    console.log(imgList);
 
-    if (!data) return [];
+    if (!imgList) return [];
     const chunkSize = 5; // 원하는 크기
     const result = [];
 
-    for (let i = 0; i < data.length; i += chunkSize) {
-      result.push(data.slice(i, i + chunkSize));
+    for (let i = 0; i < imgList.length; i += chunkSize) {
+      result.push(imgList.slice(i, i + chunkSize));
     }
 
     console.log(result);
     return result;
-  }, [data]);
+  }, [imgList]);
 
   return (
     <table className="table table-bordered align-middle">
@@ -29,11 +31,13 @@ export default function ImgTable({ data }: ImgTableProps) {
           <tr key={rowIdx}>
             {datas.map((item, i) => (
               <td key={`${rowIdx}-${i}`}>
-                <img
-                  src={item.download_url}
-                  alt={`${item.author} picture`}
-                  width={'100%'}
-                />
+                <Link to={`detail/${item.id}`}>
+                  <img
+                    src={item.download_url}
+                    alt={`${item.author} picture`}
+                    width={'100%'}
+                  />
+                </Link>
               </td>
             ))}
           </tr>
