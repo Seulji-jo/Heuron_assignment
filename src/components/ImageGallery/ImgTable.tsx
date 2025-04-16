@@ -1,27 +1,41 @@
-import { useEffect } from 'react';
+import { useMemo } from 'react';
 import { ImageItem } from '../../types/ImageGallery';
-import TableDataCell from './TableDataCell';
 
 type ImgTableProps = {
   data: ImageItem[];
 };
 
 export default function ImgTable({ data }: ImgTableProps) {
-  useEffect(() => {
+  const chunkedData = useMemo(() => {
     console.log(data);
+
+    if (!data) return [];
+    const chunkSize = 5; // 원하는 크기
+    const result = [];
+
+    for (let i = 0; i < data.length; i += chunkSize) {
+      result.push(data.slice(i, i + chunkSize));
+    }
+
+    console.log(result);
+    return result;
   }, [data]);
 
   return (
     <table className="table table-bordered align-middle">
-      <thead>
-        <tr>
-          <th className="text-center">Thumbnail</th>
-        </tr>
-      </thead>
+      <thead></thead>
       <tbody>
-        {data?.map((item, idx) => (
-          <tr key={idx}>
-            <TableDataCell item={item} />
+        {chunkedData?.map((datas, rowIdx) => (
+          <tr key={rowIdx}>
+            {datas.map((item, i) => (
+              <td key={`${rowIdx}-${i}`}>
+                <img
+                  src={item.download_url}
+                  alt={`${item.author} picture`}
+                  width={'100%'}
+                />
+              </td>
+            ))}
           </tr>
         ))}
       </tbody>
