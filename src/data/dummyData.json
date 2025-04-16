@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Coffee Mug",
+    "category": "Kitchen",
+    "createdAt": "2025-01-10"
+  },
+  {
+    "id": 2,
+    "name": "Bluetooth Speaker",
+    "category": "Electronics",
+    "createdAt": "2025-02-14"
+  },
+  {
+    "id": 3,
+    "name": "Yoga Mat",
+    "category": "Fitness",
+    "createdAt": "2025-03-02"
+  },
+  {
+    "id": 4,
+    "name": "Desk Lamp",
+    "category": "Home Office",
+    "createdAt": "2025-01-25"
+  },
+  {
+    "id": 5,
+    "name": "Running Shoes",
+    "category": "Footwear",
+    "createdAt": "2025-02-07"
+  },
+  {
+    "id": 6,
+    "name": "Ballpoint Pen",
+    "category": "Stationery",
+    "createdAt": "2025-01-18"
+  },
+  {
+    "id": 7,
+    "name": "Wireless Keyboard",
+    "category": "Electronics",
+    "createdAt": "2025-03-10"
+  },
+  {
+    "id": 8,
+    "name": "Notebook",
+    "category": "Stationery",
+    "createdAt": "2025-01-30"
+  },
+  {
+    "id": 9,
+    "name": "Water Bottle",
+    "category": "Fitness",
+    "createdAt": "2025-02-21"
+  },
+  {
+    "id": 10,
+    "name": "Monitor Stand",
+    "category": "Home Office",
+    "createdAt": "2025-03-05"
+  }
+]
