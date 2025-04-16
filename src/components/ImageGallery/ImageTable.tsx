@@ -8,8 +8,6 @@ type ImageTableProps = {
 
 export default function ImageTable({ imgList }: ImageTableProps) {
   const chunkedData = useMemo(() => {
-    console.log(imgList);
-
     if (!imgList) return [];
     const chunkSize = 5; // 원하는 크기
     const result = [];
@@ -18,7 +16,6 @@ export default function ImageTable({ imgList }: ImageTableProps) {
       result.push(imgList.slice(i, i + chunkSize));
     }
 
-    console.log(result);
     return result;
   }, [imgList]);
 

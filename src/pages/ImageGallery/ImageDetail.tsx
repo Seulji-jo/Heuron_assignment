@@ -4,16 +4,16 @@ import { useParams } from 'react-router-dom';
 import CanvasImage from '../../components/ImageGallery/CanvasImage';
 import ImgColorSwitch from '../../components/ImageGallery/ImgColorSwitch';
 import { ImgColorContext } from '../../contexts/ImgColorContext';
+import useElementSize from '../../hooks/useElementSize';
 import useImageList from '../../hooks/useImageList';
 
-import useResize from '../../hooks/useReSize';
 import { ImageItem } from '../../types/ImageGallery';
 
 export default function ImageDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const params = useParams().imgId;
   const [isColorImg, setIsColorImg] = useState(true);
-  const { dimensions } = useResize(containerRef);
+  const { dimensions } = useElementSize(containerRef);
   console.log(dimensions);
 
   const { data: imgList } = useImageList();
