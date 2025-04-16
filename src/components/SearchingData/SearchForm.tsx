@@ -1,11 +1,10 @@
-import useForm from '../../hooks/useForm';
+import { Values } from '../../types/SearchingData';
 
-export default function SearchForm() {
-  const { name, category, createdAt } = useForm({
-    name: '',
-    category: '',
-    createdAt: '',
-  });
+type SearchFormProps = {
+  values: Values;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+export default function SearchForm({ values, onChange }: SearchFormProps) {
   return (
     <div className="row">
       <div className="form-floating col-4">
@@ -14,7 +13,8 @@ export default function SearchForm() {
           className="form-control"
           name="name"
           placeholder="Coffee Mug"
-          {...name}
+          value={values.name}
+          onChange={onChange}
         />
         <label htmlFor="name">Product Name</label>
       </div>
@@ -24,7 +24,8 @@ export default function SearchForm() {
           className="form-control"
           name="category"
           placeholder="Kitchen"
-          {...category}
+          value={values.category}
+          onChange={onChange}
         />
         <label htmlFor="category">Category</label>
       </div>
@@ -34,7 +35,8 @@ export default function SearchForm() {
           className="form-control"
           name="createdAt"
           placeholder="2025-01-10"
-          {...createdAt}
+          value={values.createdAt}
+          onChange={onChange}
         />
         <label htmlFor="createdAt">Created At</label>
       </div>
