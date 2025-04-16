@@ -4,19 +4,19 @@ export default function Layout() {
   return (
     <div>
       <header>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-sm bg-body-tertiary">
           <div className="container">
             <ul className="navbar-nav my-3 gap-3">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
+              </li> */}
+              <li className="nav-item">
                 <NavLink to="/assign1">과제1</NavLink>
               </li>
-              <li>
+              <li className="nav-item">
                 <NavLink to="/assign2">과제2</NavLink>
               </li>
-              <li>
+              <li className="nav-item">
                 <NavLink to="/assign3">과제3</NavLink>
               </li>
             </ul>

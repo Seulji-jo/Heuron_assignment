@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import { RouterProvider } from 'react-router-dom';
-import Canvas from './components/ImageGallery/Canvas';
 import Layout from './layout';
 import CardGame from './pages/CardGame';
 import ImageGallery from './pages/ImageGallery';
+import ImageDetail from './pages/ImageGallery/ImageDetail';
 import SearchingData from './pages/SearchingData';
 
 const router = createBrowserRouter([
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'detail/:imgId',
-            Component: Canvas,
+            Component: ImageDetail,
           },
         ],
       },

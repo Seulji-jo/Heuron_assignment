@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import useImageList from '../../hooks/useImageList';
 import { ImageItem } from '../../types/ImageGallery';
 
-type ImgTableProps = {
+type ImageTableProps = {
   imgList: ImageItem[];
 };
 
-export default function ImgTable({ imgList }: ImgTableProps) {
+export default function ImageTable({ imgList }: ImageTableProps) {
   const chunkedData = useMemo(() => {
     console.log(imgList);
 

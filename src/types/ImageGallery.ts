@@ -6,3 +6,8 @@ export type ImageItem = {
   url: string;
   download_url: string;
 };
+
+export type ImgColorContextType = {
+  isColorImg: boolean;
+  setIsColorImg: React.Dispatch<React.SetStateAction<boolean>>;
+};
