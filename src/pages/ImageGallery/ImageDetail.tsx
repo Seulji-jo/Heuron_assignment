@@ -34,7 +34,7 @@ export default function ImageDetail() {
       }}
     >
       <ToggleSwitch
-        id="image-color-toggle"
+        name="isColor"
         checked={isColorImg}
         onChange={setIsColorImg}
         label={isColorImg ? 'color' : 'gray'}

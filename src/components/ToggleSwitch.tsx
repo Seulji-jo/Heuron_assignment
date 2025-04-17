@@ -1,14 +1,14 @@
 type ToggleSwitchProps = {
-  id: string;
   label?: string;
+  name: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  onChange: (e: React.SetStateAction<boolean>) => void;
   className?: string;
 };
 
 export default function ToggleSwitch({
-  id,
   label,
+  name,
   checked,
   onChange,
   className = '',
@@ -19,12 +19,13 @@ export default function ToggleSwitch({
         className="form-check-input"
         type="checkbox"
         role="switch"
-        id={id}
+        name={name}
+        id={name}
         checked={checked}
         onChange={() => onChange(!checked)}
       />
       {label && (
-        <label className="form-check-label" htmlFor={id}>
+        <label className="form-check-label" htmlFor={name}>
           {label}
         </label>
       )}
