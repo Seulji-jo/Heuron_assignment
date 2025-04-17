@@ -1,4 +1,5 @@
 import { Values } from '../../types/SearchingData';
+import Input from '../Input';
 
 type SearchFormProps = {
   values: Values;
@@ -7,39 +8,27 @@ type SearchFormProps = {
 export default function SearchForm({ values, onChange }: SearchFormProps) {
   return (
     <div className="row">
-      <div className="form-floating col-4">
-        <input
-          type="text"
-          className="form-control"
-          name="name"
-          placeholder="Coffee Mug"
-          value={values.name}
-          onChange={onChange}
-        />
-        <label htmlFor="name">Product Name</label>
-      </div>
-      <div className="form-floating col-4">
-        <input
-          type="text"
-          className="form-control"
-          name="category"
-          placeholder="Kitchen"
-          value={values.category}
-          onChange={onChange}
-        />
-        <label htmlFor="category">Category</label>
-      </div>
-      <div className="form-floating col-4">
-        <input
-          type="text"
-          className="form-control"
-          name="createdAt"
-          placeholder="2025-01-10"
-          value={values.createdAt}
-          onChange={onChange}
-        />
-        <label htmlFor="createdAt">Created At</label>
-      </div>
+      <Input
+        label="Product Name"
+        name="name"
+        value={values.name}
+        onChange={onChange}
+        placeholder="Coffee Mug"
+      />
+      <Input
+        label="Category"
+        name="category"
+        value={values.category}
+        onChange={onChange}
+        placeholder="Kitchen"
+      />
+      <Input
+        label="Created Date"
+        name="createdAt"
+        value={values.createdAt}
+        onChange={onChange}
+        placeholder="2025-01-10"
+      />
     </div>
   );
 }
