@@ -8,8 +8,9 @@ export default function useForm<T extends Record<string, unknown>>(
   const onChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
-    setValues(prev => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    const val = type === 'number' ? +value : value;
+    setValues(prev => ({ ...prev, [name]: val }));
   };
 
   return {

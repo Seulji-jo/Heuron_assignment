@@ -6,6 +6,8 @@ type InputProps = {
   placeholder?: string;
   type?: string;
   className?: string;
+  min?: number;
+  max?: number;
 };
 
 export default function Input({
@@ -16,6 +18,8 @@ export default function Input({
   placeholder = '',
   type = 'text',
   className = 'col-4',
+  min,
+  max,
 }: InputProps) {
   return (
     <div className={`form-floating ${className}`}>
@@ -24,6 +28,8 @@ export default function Input({
         className="form-control"
         name={name}
         id={name}
+        min={min}
+        max={max}
         placeholder={placeholder || label}
         value={value}
         onChange={onChange}
