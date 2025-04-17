@@ -1,10 +1,10 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef } from 'react';
 import { Layer, Stage } from 'react-konva';
 import { useParams } from 'react-router-dom';
 import CanvasImage from '../../components/ImageGallery/CanvasImage';
-import ImgColorSwitch from '../../components/ImageGallery/ImgColorSwitch';
-import { ImgColorContext } from '../../contexts/ImgColorContext';
+import ToggleSwitch from '../../components/ToggleSwitch';
 import useElementSize from '../../hooks/useElementSize';
+import { useImageColor } from '../../hooks/useImageColor';
 import useImageList from '../../hooks/useImageList';
 
 import { ImageItem } from '../../types/ImageGallery';
@@ -12,7 +12,7 @@ import { ImageItem } from '../../types/ImageGallery';
 export default function ImageDetail() {
   const containerRef = useRef<HTMLDivElement>(null);
   const params = useParams().imgId;
-  const [isColorImg, setIsColorImg] = useState(true);
+  const { isColorImg = true, setIsColorImg } = useImageColor();
   const { dimensions } = useElementSize(containerRef);
   console.log(dimensions);
 
@@ -33,22 +33,25 @@ export default function ImageDetail() {
         position: 'relative',
       }}
     >
-      <ImgColorContext value={{ isColorImg, setIsColorImg }}>
-        <ImgColorSwitch />
-        <Stage
-          width={dimensions.width}
-          height={dimensions.height}
-          style={{ backgroundColor: '#f0f0f0' }}
-        >
-          <Layer>
-            <CanvasImage
-              imgSrc={imgSrc}
-              canvasWidth={dimensions.width}
-              canvasHeight={dimensions.height}
-            />
-          </Layer>
-        </Stage>
-      </ImgColorContext>
+      <ToggleSwitch
+        id="image-color-toggle"
+        checked={isColorImg}
+        onChange={setIsColorImg}
+        label={isColorImg ? 'color' : 'gray'}
+      />
+      <Stage
+        width={dimensions.width}
+        height={dimensions.height}
+        style={{ backgroundColor: '#f0f0f0' }}
+      >
+        <Layer>
+          <CanvasImage
+            imgSrc={imgSrc}
+            canvasWidth={dimensions.width}
+            canvasHeight={dimensions.height}
+          />
+        </Layer>
+      </Stage>
     </div>
   );
 }
