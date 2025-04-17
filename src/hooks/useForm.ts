@@ -5,6 +5,10 @@ export default function useForm<T extends Record<string, unknown>>(
 ) {
   const [values, setValues] = useState<T>(defaultVal);
 
+  const resetValues = (initialVal: T) => {
+    setValues(initialVal);
+  };
+
   const onChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -16,5 +20,6 @@ export default function useForm<T extends Record<string, unknown>>(
   return {
     values,
     onChange,
+    resetValues,
   };
 }

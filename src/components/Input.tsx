@@ -8,6 +8,7 @@ type InputProps = {
   className?: string;
   min?: number;
   max?: number;
+  readOnly?: boolean;
 };
 
 export default function Input({
@@ -17,9 +18,10 @@ export default function Input({
   onChange,
   placeholder = '',
   type = 'text',
-  className = 'col-4',
+  className = '',
   min,
   max,
+  readOnly = false,
 }: InputProps) {
   return (
     <div className={`form-floating ${className}`}>
@@ -33,6 +35,7 @@ export default function Input({
         placeholder={placeholder || label}
         value={value}
         onChange={onChange}
+        readOnly={readOnly}
       />
       <label htmlFor={name}>{label}</label>
     </div>
