@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import HightlightText from '../components/SearchingData/HighlightText';
 import SearchForm from '../components/SearchingData/SearchForm';
 import dummyData from '../data/dummyData.json';
-import useForm from '../hooks/useForm';
+import useInput from '../hooks/useInput';
 import { Product, Values } from '../types/SearchingData';
 
 export default function SearchingData() {
   const [products, setProducts] = useState<Product[]>(dummyData);
-  const { values, onChange } = useForm<Values>({
+  const { values, onChange } = useInput<Values>({
     name: '',
     category: '',
     createdAt: '',

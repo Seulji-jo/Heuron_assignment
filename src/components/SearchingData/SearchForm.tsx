@@ -11,6 +11,7 @@ export default function SearchForm({ values, onChange }: SearchFormProps) {
       <Input
         label="Product Name"
         name="name"
+        className="col"
         value={values.name}
         onChange={onChange}
         placeholder="Coffee Mug"
@@ -18,6 +19,7 @@ export default function SearchForm({ values, onChange }: SearchFormProps) {
       <Input
         label="Category"
         name="category"
+        className="col"
         value={values.category}
         onChange={onChange}
         placeholder="Kitchen"
@@ -25,6 +27,7 @@ export default function SearchForm({ values, onChange }: SearchFormProps) {
       <Input
         label="Created Date"
         name="createdAt"
+        className="col"
         value={values.createdAt}
         onChange={onChange}
         placeholder="2025-01-10"
