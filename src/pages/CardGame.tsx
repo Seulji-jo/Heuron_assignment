@@ -2,81 +2,98 @@ import { useEffect, useState } from 'react';
 import Input from '../components/Input';
 import Modal from '../components/Modal';
 import ToggleSwitch from '../components/ToggleSwitch';
-import useChunkedData from '../hooks/useChunkedData';
 import useForm from '../hooks/useForm';
-import { CardGameData } from '../types/CardGame';
+import { CardGameData, PlayerList } from '../types/CardGame';
 
 export default function CardGame() {
   const { values, onChange, resetValues } = useForm<CardGameData>({
     players: 0,
     cards: 0,
   });
-  const [playerList, setPlayerList] = useState<number[]>([]);
-  const [cardList, setCardList] = useState<number[]>([]);
-  const [isShowCardNum, setIsShowCardNum] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [winnerInfo, setWinnerInfo] = useState({
-    player: 0,
+  const [playerList, setPlayerList] = useState<PlayerList[]>([]);
+  const [winnerInfo, setWinnerInfo] = useState<PlayerList>({
+    name: '',
     score: 0,
-    cards: '',
+    cards: [],
   });
-  const chunkedCards = useChunkedData(cardList, values.cards);
 
-  const resetAllData = () => {
-    resetValues({
-      players: 0,
-      cards: 0,
+  const [isShowScore, setIsShowScore] = useState(false);
+  const [isShowCards, setIsShowCards] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const createCards = (leng: number) => {
+    return Array.from({ length: leng }, () => Math.floor(Math.random() * 99));
+  };
+
+  const createPlayers = (count: number, cardCount: number): PlayerList[] =>
+    Array.from({ length: count }, () => {
+      const cards = createCards(cardCount);
+      const score = cards.reduce((a, b) => a + b, 0);
+      return { name: `player${playerList.length + 1}`, score, cards };
     });
-  };
-
-  const shuffle = (arr: number[]) => {
-    if (arr.length <= 0) return;
-    const copiedArr = [...arr];
-    for (let i = copiedArr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copiedArr[i], copiedArr[j]] = [copiedArr[j], copiedArr[i]];
-    }
-    setCardList(copiedArr);
-  };
 
   const result = () => {
-    const winner = chunkedCards.reduce(
-      (res, curr, i) => {
-        const sumCards = curr.reduce((a, b) => a + b);
-        if (res.score <= sumCards) {
-          res.player = i + 1;
-          res.score = sumCards;
-          res.cards = curr.join(', ');
-        }
-        return res;
-      },
-      { player: 0, score: 0, cards: '' }
+    const winner = playerList.reduce<PlayerList>(
+      (res, curr) => (res.score <= curr.score ? curr : res),
+      { name: '', score: 0, cards: [] }
     );
     console.log(winner);
     setWinnerInfo(winner);
   };
 
   const openModal = () => {
-    result(); // 결과 계산 함수
+    result();
     setIsModalOpen(true);
   };
   const closeModal = () => {
     setIsModalOpen(false);
-    resetAllData();
+    resetValues({
+      players: 0,
+      cards: 0,
+    });
+    setPlayerList([]);
   };
 
+  // 플레이어 수 변경 시 목록 조정
   useEffect(() => {
-    const playerList = Array.from({ length: values.players }, (_, i) => i + 1);
+    setPlayerList(prev => {
+      const current = [...prev];
+      const diff = values.players - current.length;
 
-    setPlayerList(playerList);
+      if (diff > 0) {
+        return [...current, ...createPlayers(diff, values.cards)];
+      } else if (diff < 0) {
+        return current.slice(0, values.players);
+      }
+      return current;
+    });
   }, [values.players]);
 
   useEffect(() => {
-    const totalCards = values.cards * values.players;
-    const cardList = Array.from({ length: totalCards }, (_, i) => i + 1);
+    console.log(playerList);
+  }, [playerList]);
 
-    shuffle(cardList);
-  }, [values.cards, values.players]);
+  useEffect(() => {
+    if (values.cards === undefined || values.cards === null) return;
+
+    const updated = playerList.map(player => {
+      let cards = [...player.cards];
+
+      if (cards.length < values.cards) {
+        cards = [...cards, ...createCards(values.cards - cards.length)];
+      } else if (cards.length > values.cards) {
+        cards = cards.slice(0, values.cards);
+      }
+
+      return {
+        ...player,
+        cards,
+        score: cards.reduce((a, b) => a + b, 0),
+      };
+    });
+
+    setPlayerList(updated);
+  }, [values.cards]);
 
   return (
     <div>
@@ -104,50 +121,53 @@ export default function CardGame() {
             onChange={onChange}
           />
           <button
-            className="col-2 btn btn-warning"
-            onClick={() => shuffle(cardList)}
+            className="col-2 btn btn-primary"
+            onClick={openModal}
+            disabled={values.cards < 1 || values.players < 1}
           >
-            카드 섞기
-          </button>
-          <button className="col-2 btn btn-primary" onClick={openModal}>
             결과 발표
           </button>
           <Modal isOpen={isModalOpen} title="게임 결과" onClose={closeModal}>
             <div>
-              <div>승자 : {`Player${winnerInfo.player}`}</div>
+              <div>승자 : {winnerInfo.name}</div>
               <div>점수 : {winnerInfo.score}</div>
-              <div>보유카드 : {winnerInfo.cards}</div>
+              <div>보유카드 : {winnerInfo.cards.join(', ')}</div>
             </div>
           </Modal>
         </div>
-        <ToggleSwitch
-          id="image-color-toggle"
-          checked={isShowCardNum}
-          onChange={setIsShowCardNum}
-          label={'카드 번호 공개'}
-        />
+        <div className="row gap-1 px-3">
+          <ToggleSwitch
+            id="image-color-toggle"
+            className="col-2"
+            checked={isShowScore}
+            onChange={setIsShowScore}
+            label={'score 공개'}
+          />
+          <ToggleSwitch
+            id="image-color-toggle"
+            className="col-2"
+            checked={isShowCards}
+            onChange={setIsShowCards}
+            label={'카드 점수 공개'}
+          />
+        </div>
       </div>
       <div className="d-flex flex-wrap gap-2">
-        {playerList.map((playerNum, i) => (
-          <div
-            key={`player${playerNum}`}
-            className="card"
-            style={{ width: '24%' }}
-          >
+        {playerList.map(player => (
+          <div key={player.name} className="card" style={{ width: '24%' }}>
             <div className="card-body">
-              <h5 className="card-title">Player {playerNum}</h5>
+              <h5 className="card-title">{player.name}</h5>
+              <div>점수: {isShowScore ? player.score : '?'}</div>
               <div className="d-flex flex-wrap gap-2">
-                {chunkedCards.length
-                  ? chunkedCards[i]?.map((num, idx) => (
-                      <div
-                        key={`card${idx}`}
-                        className="card text-center"
-                        style={{ width: '15%' }}
-                      >
-                        {isShowCardNum ? num : '?'}
-                      </div>
-                    ))
-                  : null}
+                {player.cards.map((num, idx) => (
+                  <div
+                    key={`card${idx}`}
+                    className="card text-center"
+                    style={{ width: '15%' }}
+                  >
+                    {isShowCards ? num : '?'}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
