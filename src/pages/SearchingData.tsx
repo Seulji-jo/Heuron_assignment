@@ -12,8 +12,8 @@ export default function SearchingData() {
     category: '',
     createdAt: '',
   });
+
   useEffect(() => {
-    console.log(products);
     const filteredProducts = dummyData.reduce((acc: Product[], curr) => {
       const isName = curr.name.includes(values.name);
       const isCategory = curr.category.includes(values.category);
@@ -21,7 +21,7 @@ export default function SearchingData() {
       if (isName && isCategory && isCreatedAt) acc = [...acc, curr];
       return acc;
     }, []);
-    console.log(filteredProducts);
+
     setProducts(filteredProducts);
   }, [values]);
   return (
