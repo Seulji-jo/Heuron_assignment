@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-export default function useForm<T extends Record<string, unknown>>(
+export default function useInput<T extends Record<string, unknown>>(
   defaultVal: T
 ) {
   const [values, setValues] = useState<T>(defaultVal);
