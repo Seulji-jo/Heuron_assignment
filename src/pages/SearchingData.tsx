@@ -29,7 +29,7 @@ export default function SearchingData() {
       <SearchForm values={values} onChange={onChange} />
       {products.map(prod => {
         return (
-          <div key={prod.id} className="row">
+          <div key={prod.id} className="row border-bottom py-2">
             <div className="col-4">
               {HightlightText(prod.name, values.name)}
             </div>

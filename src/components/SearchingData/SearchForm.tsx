@@ -7,7 +7,7 @@ type SearchFormProps = {
 };
 export default function SearchForm({ values, onChange }: SearchFormProps) {
   return (
-    <div className="row">
+    <div className="row mb-4">
       <Input
         label="Product Name"
         name="name"
