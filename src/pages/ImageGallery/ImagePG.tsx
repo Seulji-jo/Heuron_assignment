@@ -9,7 +9,7 @@ import useImageList from '../../hooks/useImageList';
 
 import { ImageItem } from '../../types/ImageGallery';
 
-export default function ImageDetail() {
+export default function ImagePG() {
   const containerRef = useRef<HTMLDivElement>(null);
   const params = useParams().imgId;
   const { isColorImg = true, setIsColorImg } = useImageColor();

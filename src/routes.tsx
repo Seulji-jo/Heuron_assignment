@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import Layout from './layout';
 import CardGame from './pages/CardGame';
 import ImageGallery from './pages/ImageGallery';
-import ImageDetail from './pages/ImageGallery/ImageDetail';
+import ImagePG from './pages/ImageGallery/ImagePG';
 import SearchingData from './pages/SearchingData';
 
 const router = createBrowserRouter([
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'detail/:imgId',
-            Component: ImageDetail,
+            Component: ImagePG,
           },
         ],
       },
