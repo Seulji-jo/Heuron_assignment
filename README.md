@@ -123,14 +123,14 @@ Context API를 사용해 전역상태를 관리하는 모듈을 모아놓은 디
 
 재사용 가능한 커스텀 훅(custom hooks)들을 모아놓은 디렉토리입니다.
 
-- `📄 useChunkedData.ts`: 데이터를 일정 크기로 분할하여 반환하는 훅입니다.
-- `📄 useChunkedData.ts`: 데이터를 일정 크기로 분할하여 반환하는 훅입니다.
-- `📄 useElementSize.ts`: 특정 DOM의 요소의 크기를 실시간 측정 후 반환하는 훅입니다.
-- `📄 useImageColor.ts`: 이미지 색상 모드(컬러/흑백)를 전역적으로 관리하기 위한 훅입니다. Context를 읽고 구독할 수 있는 useContext가 담겨있습니다.
-- `📄 useImageDrag.ts`: 이미지 드래그 동작을 처리하는 훅입니다. 드래그 시작, 이동, 종료 이벤트를 관리 합니다.
-- `📄 useImageList.ts`: 이미지 리스트를 불러오는 useQuery가 담긴 훅입니다. 비동기 로직을 쉽게 다룰 수 있게 도와줍니다. isLoading, isError, data등을 반환합니다.
-- `📄 useInput.ts`: Input 컴포넌트와 연동되는 훅으로 폼 입력 상태관리를 합니다.
-- `📄 usePlayerList.ts`: 카드 게임의 플레이어에 관련된 로직을 관리하는 훅입니다. 플레이어(카드) 생성 및 삭제, 점수 계산 등의 기능이 있습니다.
+- 📄 `useChunkedData.ts`: 데이터를 일정 크기로 분할하여 반환하는 훅입니다.
+- 📄 `useChunkedData.ts`: 데이터를 일정 크기로 분할하여 반환하는 훅입니다.
+- 📄 `useElementSize.ts`: 특정 DOM의 요소의 크기를 실시간 측정 후 반환하는 훅입니다.
+- 📄 `useImageColor.ts`: 이미지 색상 모드(컬러/흑백)를 전역적으로 관리하기 위한 훅입니다. Context를 읽고 구독할 수 있는 useContext가 담겨있습니다.
+- 📄 `useImageDrag.ts`: 이미지 드래그 동작을 처리하는 훅입니다. 드래그 시작, 이동, 종료 이벤트를 관리 합니다.
+- 📄 `useImageList.ts`: 이미지 리스트를 불러오는 useQuery가 담긴 훅입니다. 비동기 로직을 쉽게 다룰 수 있게 도와줍니다. isLoading, isError, data등을 반환합니다.
+- 📄 `useInput.ts`: Input 컴포넌트와 연동되는 훅으로 폼 입력 상태관리를 합니다.
+- 📄 `usePlayerList.ts`: 카드 게임의 플레이어에 관련된 로직을 관리하는 훅입니다. 플레이어(카드) 생성 및 삭제, 점수 계산 등의 기능이 있습니다.
 
 ### 📁 layout
 
@@ -141,11 +141,11 @@ Context API를 사용해 전역상태를 관리하는 모듈을 모아놓은 디
 라우팅 단위를 구성하는 페이지 컴포넌트들을 포함하고 있습니다.
 각 페이지는 고유한 URL경로를 가지고 있습니다.
 
-- `📁 ImageGallery`
-  - `📄 index.tsx`: 이미지갤러리의 메인페이지로, api로 불러온 이미지 썸네일을 보여줍니다.
-  - `📄 ImagePG.tsx`: 선택된 이미지로 이미지 확대/축소, 회전, 흑백/컬러 효과등을 보여줄 수 있습니다. 이미지 갤러리의 자식 페이지로 경로는 `/assign1/playground/:imgId`입니다.
-- `📄 CardGame.tsx`: 플레이어와 랜덤카드로 승패를 가리는 카드게임 페이지입니다.
-- `📄 SearchingData.tsx`: 텍스트 기반 필터링 된 검색 기능을 제공합니다.
+- 📁 `ImageGallery`
+  - 📄 `index.tsx`: 이미지갤러리의 메인페이지로, api로 불러온 이미지 썸네일을 보여줍니다.
+  - 📄 `ImagePG.tsx`: 선택된 이미지로 이미지 확대/축소, 회전, 흑백/컬러 효과등을 보여줄 수 있습니다. 이미지 갤러리의 자식 페이지로 경로는 `/assign1/playground/:imgId`입니다.
+- 📄 `CardGame.tsx`: 플레이어와 랜덤카드로 승패를 가리는 카드게임 페이지입니다.
+- 📄 `SearchingData.tsx`: 텍스트 기반 필터링 된 검색 기능을 제공합니다.
 
 ### 📁 scss
 
@@ -161,11 +161,11 @@ api관련 로직의 모듈 파일이 위치해 있습니다.
 
 ### 📁 src
 
-- `📄 routes.tsx`: 라우팅을 담당하는 파일로, 라우터 프로바이더를 반환합니다.
+- 📄 `routes.tsx`: 라우팅을 담당하는 파일로, 라우터 프로바이더를 반환합니다.
 
 ### 📁 .vscode
 
-- `📄 settings.json`: VSCode 사용자 설정을 저장해 놓은 파일로 일관된 개발환경을 유지하기 위해 세팅해 놓았습니다.
+- 📄 `settings.json`: VSCode 사용자 설정을 저장해 놓은 파일로 일관된 개발환경을 유지하기 위해 세팅해 놓았습니다.
 
 ## 프로젝트 설치 및 실행 방법
 
