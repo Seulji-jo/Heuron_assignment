@@ -20,7 +20,7 @@ const router = createBrowserRouter([
             Component: ImageGallery,
           },
           {
-            path: 'detail/:imgId',
+            path: 'playground/:imgId',
             Component: ImagePG,
           },
         ],
