@@ -33,17 +33,28 @@ export default function CardGame() {
     setWinnerInfo(winner);
   };
 
+  const resetDatas = () => {
+    resetValues({
+      players: 0,
+      cards: 0,
+    });
+    resetPlayers();
+    setWinnerInfo({
+      name: '',
+      score: 0,
+      cards: [],
+    });
+    // setIsShowScore(false);
+    // setIsShowCards(true);
+  };
+
   const openModal = () => {
     result();
     setIsModalOpen(true);
   };
   const closeModal = () => {
     setIsModalOpen(false);
-    resetValues({
-      players: 0,
-      cards: 0,
-    });
-    resetPlayers();
+    resetDatas();
   };
 
   return (
